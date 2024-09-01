@@ -9,6 +9,41 @@ export default function ScrollToTop(props) {
   const headerSectionRef = useRef(null);
 
   useEffect(() => {
+<<<<<<< HEAD
+    let animationFrameId;
+  
+    const handleScroll = () => {
+      animationFrameId = requestAnimationFrame(() => {
+        const scrollTopElement = scrollToTopRef.current;
+        const headerSectionElement = headerSectionRef.current;
+  
+        if (scrollTopElement) {
+          if (window.scrollY < 500) {
+            scrollTopElement.classList.remove('active');
+          } else {
+            scrollTopElement.classList.add('active');
+          }
+        }
+  
+        if (headerSectionElement) {
+          if (window.scrollY > 50) {
+            headerSectionElement.classList.add('animated', 'fadeInDown', 'header-fixed');
+          } else {
+            headerSectionElement.classList.remove('animated', 'fadeInDown', 'header-fixed');
+          }
+        }
+      });
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+=======
     const handleScroll = () => {
       const scrollTopElement = scrollToTopRef.current;
       const headerSectionElement = headerSectionRef.current;
@@ -32,6 +67,7 @@ export default function ScrollToTop(props) {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+>>>>>>> upstream/main
 
   const handleClick = () => {
     window.scrollTo({
