@@ -33,26 +33,15 @@ export default function Verify() {
       try {
         const res = await changeemail(email);
           setNotifications([{ type: "success", message: "OTP sent successfully!" }]);
-<<<<<<< HEAD
           navigate("/verify", { state: { email: email } });
-=======
->>>>>>> upstream/main
       } catch (error) {
         console.error("Error during verification:", error);
         setNotifications([{ type: "error", message: "An error occurred during verification" }]);
       }
       finally{
-<<<<<<< HEAD
         
         setLoading(false);
        
-=======
-        setEmail("");
-        setLoading(false);
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
->>>>>>> upstream/main
       }
     } else {
       console.log("Form is invalid");
