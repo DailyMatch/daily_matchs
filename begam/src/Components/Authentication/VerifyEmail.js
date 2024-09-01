@@ -62,7 +62,7 @@ export default function VerifyEmail() {
           <div className="row pt-120 d-flex justify-content-center">
             <div className="col-lg-6">
               <div className="login-reg-main text-center">
-                <h4>Verify Email</h4>
+                <h4>Verify OTP</h4>
                 <div className="form-area">
                   <div className="notification-container">
                     {notifications.map((notification, index) => (

@@ -9,29 +9,39 @@ export default function ScrollToTop(props) {
   const headerSectionRef = useRef(null);
 
   useEffect(() => {
+    let animationFrameId;
+  
     const handleScroll = () => {
-      const scrollTopElement = scrollToTopRef.current;
-      const headerSectionElement = headerSectionRef.current;
-
-      if (window.scrollY < 500) {
-        scrollTopElement.classList.remove('active');
-      } else {
-        scrollTopElement.classList.add('active');
-      }
-
-      if (window.scrollY > 50) {
-        headerSectionElement.classList.add('animated', 'fadeInDown', 'header-fixed');
-      } else {
-        headerSectionElement.classList.remove('animated', 'fadeInDown', 'header-fixed');
-      }
+      animationFrameId = requestAnimationFrame(() => {
+        const scrollTopElement = scrollToTopRef.current;
+        const headerSectionElement = headerSectionRef.current;
+  
+        if (scrollTopElement) {
+          if (window.scrollY < 500) {
+            scrollTopElement.classList.remove('active');
+          } else {
+            scrollTopElement.classList.add('active');
+          }
+        }
+  
+        if (headerSectionElement) {
+          if (window.scrollY > 50) {
+            headerSectionElement.classList.add('animated', 'fadeInDown', 'header-fixed');
+          } else {
+            headerSectionElement.classList.remove('animated', 'fadeInDown', 'header-fixed');
+          }
+        }
+      });
     };
-
+  
     window.addEventListener('scroll', handleScroll);
-
+  
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
 
   const handleClick = () => {
     window.scrollTo({
